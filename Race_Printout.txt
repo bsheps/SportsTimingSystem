@@ -1,0 +1,60 @@
+POWERING OFF- PENDING ITEMS:
+Starting new IND
+STARTING NEW RACE
+Channel 1 toggle: Enabled
+Channel 2 toggle: Enabled
+ Channel 1 triggered at 12:02:50.00 for racer: 234
+ERROR: Channel 3 is disabled
+ Channel 2 triggered at 12:03:35.00 for racer: 234
+ERROR: Channel 4 is disabled
+Finished234 00:00:45.00
+Never Started315
+Ending current run
+STARTING NEW RACE
+Starting new IND
+ Channel 1 triggered at 13:04:30.00 for racer: 167
+ Channel 1 triggered at 13:05:00.00 for racer: 166
+ Channel 2 triggered at 13:05:02.00 for racer: 167
+ Channel 2 triggered at 13:05:15.00 for racer: 166
+ERROR: Channel 4 is disabled
+Finished167 00:00:32.00
+Finished166 00:00:15.00
+Never Started200
+Never Started201
+POWERING OFF- PENDING ITEMS:
+STARTING NEW RACE
+POWERING OFF- PENDING ITEMS:
+Channel 1 toggle: Enabled
+Channel 2 toggle: Enabled
+ Channel 1 triggered at 12:02:50.00 for racer: noName
+ERROR: Channel 3 is disabled
+ Channel 2 triggered at 12:03:35.00 for racer: noName
+ERROR: Channel 4 is disabled
+ Channel 1 triggered at 13:04:30.00 for racer: noName
+ Channel 1 triggered at 13:05:00.00 for racer: noName
+ Channel 2 triggered at 13:05:02.00 for racer: noName
+ Channel 2 triggered at 13:05:15.00 for racer: noName
+ERROR: Channel 4 is disabled
+POWERING OFF- PENDING ITEMS:
+POWERING OFF- PENDING ITEMS:
+Starting new IND
+STARTING NEW RACE
+Channel 1 toggle: Enabled
+Channel 2 toggle: Enabled
+ Channel 1 triggered at 06:40:51.00 for racer: noName
+ Channel 2 triggered at 06:40:53.00 for racer: noName
+FinishednoName 00:00:02.00
+Ending current run
+STARTING NEW RACE
+ Channel 1 triggered at 12:02:50.00 for racer: 234
+ Channel 1 triggered at 12:02:50.00 for racer: 315
+ERROR: Channel 3 is disabled
+ Channel 2 triggered at 12:03:35.00 for racer: 234
+ Channel 1 triggered at 12:02:50.00 for racer: 317
+ Channel 2 triggered at 12:03:35.00 for racer: 315
+ERROR: Channel 4 is disabled
+Finished234 00:00:45.00
+Finished315 00:00:45.00
+DNF317
+Never Started319
+Ending current run
