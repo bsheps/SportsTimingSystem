@@ -32,7 +32,7 @@ public class IndividualEvent {
 		} // do nothing, possibly print error
 		else{
 			
-			if(chNum  == 1){	// odd means start time
+			if(chNum   == 1){	// odd means start time
 				if(WaitingToRace.size() == 0) {
 					Racer n = new Racer("noName");
 					n.startRace(time);
