@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.time.LocalTime;
 /**
  * This class handles the administrative parts of 
  * instantiating a race. It prevents multiple races
@@ -9,81 +8,25 @@ import java.time.LocalTime;
  * @author BS
  *
  */
-public class ChronoTimer {
-
-	IndividualEvent indEvent ;
-	boolean power= false;
-	boolean raceInSession;
+public class ChronoTimer implements Commands {
+	Channel chan;
+	IndividualEvent indEvent;
+	boolean _powerOn= false;
+	boolean _raceInSession=false;
 	Printer print;
-	/**
-	 * Powers the unit on and off. When powering off 
-	 * the unit tries to printResults if there are any
-	 * @throws IOException
-	 */
-	public void power() throws IOException {
-		power = !power;
-		raceInSession = false;
-		print = new Printer();
-		indEvent= new IndividualEvent(print);
-		if(!power){ 
-			raceInSession = false;
-			if(indEvent != null) {
-				print.printThis("", "POWERING OFF- PENDING ITEMS:", false);
-				printResults();
-				print.shutDownPrinter();
-			}
-			indEvent = null;
-		}
-	}
-
-	public void trigger(LocalTime times, String tokens) {
-		int channel = Integer.parseInt(tokens);
-		switch(tokens){
-		case "1" :
-			indEvent.trigger(channel, times);
-			break;
-		case "2" :
-			indEvent.trigger(channel, times);
-			break;
-		case "3" :
-			indEvent.trigger(channel, times);
-			break;
-		case "4" :
-			indEvent.trigger(channel, times);
-			break;
-		}
-	}
-
-	public void initiateNewEvent() throws IOException {
-		indEvent = new IndividualEvent(print);
-		print.printThis("", "Starting new IND", false);
-	}
-	public void startNewRun() {
-		if(raceInSession) {//errormessage
-			print.printThis("", "RACE ALREADY STARTED", false);
-		}
-		else {
-			raceInSession = true;
-			print.printThis("", "STARTING NEW RACE", false);
-		}
-	}
-
-	public void setBib(String string) {
-		indEvent.addRacer(string);
-	}
 
 	public void printResults() {
 		while(indEvent.finishers.size() > 0) {
 			Racer p = indEvent.finishers.remove();
-			print.printThis("Finished", p.bibNum + " " + p.results(), false);
+			print.printThis(p.bibNum + " " + p.results());
 		}
 		while(indEvent.inTheRace.size() >0) {
 			Racer d = indEvent.inTheRace.remove();
-			print.printThis("DNF", d.bibNum, false);
+			print.printThis(d.bibNum);
 		}
 		while(indEvent.WaitingToRace.size()>0) {
 			Racer q = indEvent.WaitingToRace.remove();
-			print.printThis("Never Started", q.bibNum, false);
+			print.printThis(q.bibNum);
 		}
 	}
 	// clears the memory
@@ -91,10 +34,156 @@ public class ChronoTimer {
 		print.PrinterRest();
 	}
 	public void usePrinter(String string){
-		print.printThis("", string, false);
+		print.printThis(string);
 	}
 	public void endRun() {
-		raceInSession= false;
-		print.printThis("", "Ending current run", false);
+		_raceInSession= false;
+		print.printThis("Ending current run");
+	}
+
+	@Override
+	public void CLR(int bibNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void CONN(String sensorType, int channel) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DISC(int channel2disconnect) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DNF() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void ENDRUN() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void EVENT(String eventName) {
+		if(_raceInSession) System.out.println("ERROR: End current event before starting a new event.");
+		else {
+			indEvent = new IndividualEvent();
+			print.printThis("Starting new IND");
+		}
+	}
+
+	@Override
+	public void EXIT() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void EXPORT(int runNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void FINISH() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void NEWRUN() {
+		if(_raceInSession) System.out.println("ERROR RACE IN SESSION: End current run before starting a NEWRUN.");
+		else
+			indEvent = new IndividualEvent();
+	}
+
+	public void NUM(String bibNumber) {
+		indEvent.addRacer(bibNumber);
+		
+	}
+
+	
+	public void POWER() {
+		if(!_powerOn) {
+			_powerOn = true;
+			chan = new Channel();
+			_raceInSession = false;
+			Time.startTime();
+		}
+		else if(_powerOn){ 
+			_powerOn = false;
+			_raceInSession = false;
+			if(indEvent != null) {
+				print.printThis("POWERING OFF- PENDING ITEMS:");
+				printResults();
+				print.shutDownPrinter();
+			}
+			indEvent = null;
+		}	
+	}
+
+	@Override
+	public void PRINT(int runNumber) {
+		
+		
+	}
+
+	@Override
+	public void RESET() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void TIME(String time) {
+		Time.setTime(time);
+		
+	}
+
+	@Override
+	public void TOG(int channelNumber) {
+		if(chan.Toggle(channelNumber)) System.out.println("Channel "+channelNumber+" was enabled.");
+		else System.out.println("Channel "+channelNumber+" was disabled.");
+	}
+
+	@Override
+	public void TRIG(int channelNumber) {
+		if(chan.isChannelEnabled(channelNumber)) {
+
+			switch(channelNumber){
+			case 1 :
+				indEvent.trigger(channelNumber);
+				break;
+			case 2 :
+				indEvent.trigger(channelNumber);
+				break;
+			case 3 :
+				indEvent.trigger(channelNumber);
+				break;
+			case 4 :
+				indEvent.trigger(channelNumber);
+				break;
+			}
+		}
+		// else do nothing, channel is disabled
+	}
+
+	@Override
+	public void START() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void SWAP() {
+		// TODO Auto-generated method stub
+		
 	}
 }
