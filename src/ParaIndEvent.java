@@ -23,35 +23,38 @@ public class ParaIndEvent {
 	}
 
 	/**
-	 * @param chanNum
-	 * @param time
+	 * @param channelNumber
+	 * @param Time.getCurrentTime()
 	 */
-	public void trigger(int chanNum, LocalTime time) {
-		if(!Channel.channel[chanNum]) printer.printThis("", "Channel "+ chanNum+" is disabled", false);
-		if(waitingToRace.size()==0) {
-			Racer noName = new Racer("noName");
-			noName.startRace(time);			
-			waitingToRace.add(noName);
-		}
-		else {
-			Racer racer = waitingToRace.remove();
-			if(chanNum==1) {
-				channels12.add(racer);
-				racer.startRace(time);
+	public void trigger(int channelNumber) {		
+			if(channelNumber==1) {
+				if(waitingToRace.size()==0) 
+					channels12.add(new Racer("noName", Time.getCurrentTime()));
+				else {
+					Racer racer = waitingToRace.remove();
+					racer.startRace(Time.getCurrentTime());
+					channels12.add(racer);
+				}
 			}
-			if(chanNum==2) {
-				finishers.add(channels12.remove());
-				racer.finishRace(time);
+			else if(channelNumber==2) {
+				Racer racer = channels12.remove();
+				racer.finishRace(Time.getCurrentTime());
+				finishers.add(racer);
 			}
-			if(chanNum==3) {
-				channels34.add(racer);
-				racer.startRace(time);
+			else if(channelNumber==3) {
+				if(waitingToRace.size()==0) 
+					channels34.add(new Racer("noName", Time.getCurrentTime()));
+				else {
+					Racer racer = waitingToRace.remove();
+					racer.startRace(Time.getCurrentTime());
+					channels34.add(racer);
+				}
 			}
-			if(chanNum==4) {
-				finishers.add(channels34.remove());
-				racer.finishRace(time);
+			else if(channelNumber==4) {
+				Racer racer = channels34.remove();
+				racer.finishRace(Time.getCurrentTime());
+				finishers.add(racer);
 			}
-		}
 	}
 
 	public void endEvent(boolean endRace) {
