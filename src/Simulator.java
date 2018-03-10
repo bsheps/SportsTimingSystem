@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Simulator{
-	ChronoTimer ct;
-	Channel chan;
+	Commands ct;
 	boolean simulatorOn;
 
 	/**
@@ -16,7 +15,6 @@ public class Simulator{
 
 		simulatorOn = true;
 		ct = new ChronoTimer();
-		chan = new Channel(ct);
 		Scanner s = new Scanner(System.in);
 		System.out.println("Read file from console or file (c/f): ");
 		String input = s.nextLine();
@@ -35,7 +33,7 @@ public class Simulator{
 		else if(input.equalsIgnoreCase("c")){
 			String uInput="";
 			System.out.println("ChronoTimer simulator: powering chronoTimer on.");
-			ct.power();
+			ct.POWER();
 			while(!uInput.equals("Q")) {
 				System.out.println("Enter Full command to be sent to parser (WITH SPACES) Q to quit:");
 				String time = Time.time2formattedString(Time.getLocalTime())+ " ";
@@ -56,38 +54,38 @@ public class Simulator{
 	private void generalParser(String[] tokens) throws IOException {
 		switch(tokens[1]){
 		case "POWER":
-			ct.power();
+			ct.POWER();
 			break;
 		case "NEWRUN":
-			ct.startNewRun();
+			ct.NEWRUN();
 			break;
 		case "TOG" :
-			chan.Toggle(Integer.parseInt(tokens[2]));
+			ct.TOG(Integer.parseInt(tokens[2]));
 			break;
 		case "TRIG":
-			String[] time = tokens[0].split(":|\\.");
-			ct.trigger(Time.string2LocalTime(time),tokens[2]);
+			ct.TRIG(Integer.parseInt(tokens[2]));
 			break;
 		case "PRINT":
-			ct.printResults();
+			ct.PRINT(Integer.parseInt(tokens[2]));
 			break;
 		case "ENDRUN":
-			ct.endRun();
+			ct.ENDRUN();
 			break;
 		case "TIME":
 			//tokens[2] to set time 
+			ct.TIME(tokens[2]);
 			break;
 		case "NUM":
-			ct.setBib(tokens[2]);
+			ct.NUM(tokens[2]);
 			break;
 		case "EVENT":
-			ct.initiateNewEvent();
+			ct.EVENT(tokens[2]);;
 			break;
 		case "EXIT":
 			simulatorOn = false;
 			break;
 		case "CONN" :
-			chan.connectSensor(tokens[2], Integer.parseInt(tokens[3]));
+			ct.CONN(tokens[2], Integer.parseInt(tokens[3]));
 		}	
 
 	}
