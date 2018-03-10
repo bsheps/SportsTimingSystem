@@ -6,37 +6,42 @@ import java.time.format.DateTimeFormatter;
  */
 public class Racer {
 	final DateTimeFormatter formatTime=DateTimeFormatter.ofPattern("HH:mm:ss.SS");;
-	String bibNum;
-	LocalTime startTime, endTime;
+	String _bibNum;
+	LocalTime _startTime, _endTime;
 	/**
 	 * Constructs a racer
 	 * @param name
 	 */
 	public Racer(String name){
-		startTime = endTime = null;
-		bibNum = name;
+		_startTime = _endTime = null;
+		_bibNum = name;
+	}
+	public Racer(String name, LocalTime start) {
+		_startTime = start;
+		_endTime = null;
+		_bibNum = name;
 	}
 	/**
 	 * Sets the start time for racer
 	 * @param time
 	 */
 	public void startRace(LocalTime time) {
-		startTime = time;
+		_startTime = time;
 	}
 	/**
 	 * Sets the end time for racer
 	 * @param time
 	 */
 	public void finishRace(LocalTime time) {
-		endTime = time;
+		_endTime = time;
 	}
 	/**
 	 * 
 	 * @return a printer friendly string of the racer's time
 	 */
 	public String results() {
-		if(endTime == null || startTime == null)return "Error printing results";
-		return LocalTime.ofNanoOfDay(endTime.toNanoOfDay() - startTime.toNanoOfDay()).format(formatTime);
+		if(_endTime == null || _startTime == null)return "Error printing results";
+		return LocalTime.ofNanoOfDay(_endTime.toNanoOfDay() - _startTime.toNanoOfDay()).format(formatTime);
 	}
 
 
