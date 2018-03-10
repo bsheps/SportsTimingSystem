@@ -11,7 +11,7 @@ import java.io.PrintWriter;
  * use the printer
  */
 public class Printer {
-	private PrintWriter printer;
+	private static PrintWriter printer;
 
 	/**Constructor for the printer. This method sets up everything we need for printing a receipt.txt file,
 	 * if the file exists it appends it instead of overwritting
@@ -30,14 +30,11 @@ public class Printer {
 	}
 	/**
 	 * 
-	 * @param time comes in via the correct format
 	 * @param message - maybe the racer's name?
-	 * @param includeTime self explanatory
 	 */
-	public void printThis(String time, String message, boolean includeTime) {
-		System.out.println(time + message);
-		if(includeTime) printer.println(time + message);
-		else printer.println(time  + message);
+	public void printThis(String message) {
+		System.out.println(message);
+		printer.println(message);
 		printer.flush();
 	}
 	public void shutDownPrinter() {
