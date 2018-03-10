@@ -79,7 +79,6 @@ public class Simulator{
 			ct.NUM(tokens[2]);
 			break;
 		case "EVENT":
-			
 			ct.EVENT(tokens[2]);;
 			break;
 		case "EXIT":

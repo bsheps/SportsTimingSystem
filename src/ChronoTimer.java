@@ -90,7 +90,7 @@ public class ChronoTimer implements Commands {
 
 	public void EVENT(String eventName) {
 		if(_raceInSession) System.out.println("ERROR: End current event before setting a new event.");
-		else if(eventName.equals("IND")|| eventName.equals("PARAIND"))
+		else if(eventName.equals("IND")|| eventName.equals("PARIND"))
 		{
 			_eventName = eventName;
 			print.printThis("Setting event to " + eventName);
@@ -124,7 +124,7 @@ public class ChronoTimer implements Commands {
 			_raceInSession = true;
 			if(_eventName.equals("IND"))
 				indEvent = new IndividualEvent();
-			else if(_eventName.equals("PARAIND"))
+			else if(_eventName.equals("PARIND"))
 				paraEvent = new ParaIndEvent();
 		}
 	}
@@ -147,14 +147,14 @@ public class ChronoTimer implements Commands {
 		else if(_powerOn){ 
 			_powerOn = false;
 			_raceInSession = false;
-			if(indiEvent && indEvent != null) {
+			if(_eventName.equals("IND") && indEvent != null) {
 				print.printThis("POWERING OFF- PENDING ITEMS:");
 				printResults();
 				print.shutDownPrinter();
 			}
 			indEvent = null;
 
-			if(parIndEvent && paraEvent!=null) {
+			if(_eventName.equals("PARIND") && paraEvent!=null) {
 				print.printThis("POWERING OFF - PENDING ITEMS:");
 				printResults();
 				print.shutDownPrinter();
@@ -196,7 +196,7 @@ public class ChronoTimer implements Commands {
 		if(chan.isChannelEnabled(channelNumber) && _raceInSession) {
 			if(_eventName.equals("IND")) 
 				indEvent.trigger(channelNumber);
-			else if(_eventName.equals("PARAIND")) 
+			else if(_eventName.equals("PARIND")) 
 				paraEvent.trigger(channelNumber);
 				
 			}
