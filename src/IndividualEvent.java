@@ -16,7 +16,6 @@ public class IndividualEvent {
 		finishers= (Queue<Racer>) new LinkedList<Racer>();
 		printer = p;
 	}
-
 	public void addRacer(String name){
 		WaitingToRace.add(new Racer(name));
 	}
