@@ -60,9 +60,9 @@ public class ParaIndEvent {
 	public void endEvent(boolean endRace) {
 		if(endRace) {
 			while(channels12.size()!=0)
-				channels12.remove().startRace(null);
+				finishers.add(channels12.remove());
 			while(channels34.size()!=0)
-				channels34.remove().startRace(null);
+				finishers.add(channels34.remove());
 		}
 	}
 

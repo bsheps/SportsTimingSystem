@@ -63,7 +63,7 @@ public class Simulator{
 			ct.TOG(Integer.parseInt(tokens[2]));
 			break;
 		case "TRIG":
-			ct.TRIG(Integer.parseInt(tokens[2]));
+			ct.TRIG(Integer.parseInt(tokens[2]), null);
 			break;
 		case "PRINT":
 			ct.PRINT(Integer.parseInt(tokens[2]));
@@ -79,6 +79,7 @@ public class Simulator{
 			ct.NUM(tokens[2]);
 			break;
 		case "EVENT":
+			
 			ct.EVENT(tokens[2]);;
 			break;
 		case "EXIT":
