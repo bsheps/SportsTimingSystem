@@ -11,11 +11,11 @@ public interface Commands {
 	void EXPORT(int runNumber); // 
 	void FINISH();	// trigger channel 2
 	void NEWRUN();	
-	void NUM(int bibNumber); // set next competitor to start
+	void NUM(String bibNumber); // set next competitor to start
 	void POWER();
 	void PRINT(int runNumber); // 
 	void RESET();
-	void TIMEset(LocalTime time);
+	void TIME(String time);
 	void TOG(int channelNumber);
 	void TRIG(int channelNumber);	
 	void START();	// trigger channel 1
