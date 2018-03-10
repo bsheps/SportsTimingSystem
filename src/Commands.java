@@ -17,7 +17,7 @@ public interface Commands {
 	void RESET();
 	void TIME(String time);
 	void TOG(int channelNumber);
-	void TRIG(int channelNumber, String eventType);	
+	void TRIG(int channelNumber);	
 	void START();	// trigger channel 1
 	void SWAP(); // swap the next 2 competitor from queue	
 }

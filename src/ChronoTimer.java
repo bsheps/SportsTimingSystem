@@ -10,6 +10,7 @@ import java.io.IOException;
  */
 public class ChronoTimer implements Commands {
 	Channel chan;
+	String _eventName = "IND";
 	IndividualEvent indEvent;
 	ParaIndEvent paraEvent;
 	boolean _powerOn= false;
@@ -82,21 +83,20 @@ public class ChronoTimer implements Commands {
 
 	@Override
 	public void ENDRUN() {
-		// TODO Auto-generated method stub
+		_raceInSession = false;
+		// TODO Storage of the results needs to happen here
 
 	}
 
 	public void EVENT(String eventName) {
-		if(_raceInSession) System.out.println("ERROR: End current event before starting a new event.");
-		if(eventName.equals("IND"))
+		if(_raceInSession) System.out.println("ERROR: End current event before setting a new event.");
+		else if(eventName.equals("IND")|| eventName.equals("PARAIND"))
 		{
-			indEvent = new IndividualEvent();
-			print.printThis("Starting new IND");
+			_eventName = eventName;
+			print.printThis("Setting event to " + eventName);
 		}
-		else if(eventName.equals("PARAIND")) {
-			paraEvent = new ParaIndEvent();
-			print.printThis("Starting new PARAIND");
-		}
+		else
+			System.out.println("ERROR: INVALID EVENT NAME");
 	}
 
 	@Override
@@ -120,10 +120,13 @@ public class ChronoTimer implements Commands {
 	@Override
 	public void NEWRUN() {
 		if(_raceInSession) System.out.println("ERROR RACE IN SESSION: End current run before starting a NEWRUN.");
-		if(indiEvent)
-			indEvent = new IndividualEvent();
-		else if(parIndEvent)
-			paraEvent = new ParaIndEvent();
+		else{
+			_raceInSession = true;
+			if(_eventName.equals("IND"))
+				indEvent = new IndividualEvent();
+			else if(_eventName.equals("PARAIND"))
+				paraEvent = new ParaIndEvent();
+		}
 	}
 
 	public void NUM(String bibNumber) {
@@ -189,52 +192,18 @@ public class ChronoTimer implements Commands {
 
 	//could we pass on the event type because this is only for indrun 
 	@Override
-	public void TRIG(int channelNumber, String eventType) {
-		if(eventType==null) return;
-		if(chan.isChannelEnabled(channelNumber)) {
-			if(eventType.equals("IND")) {
-				indiEvent=true;
-				switch(channelNumber){
-				case 1 :
-					indEvent.trigger(channelNumber);
-					break;
-				case 2 :
-					indEvent.trigger(channelNumber);
-					break;
-				case 3 :
-					indEvent.trigger(channelNumber);
-					break;
-				case 4 :
-					indEvent.trigger(channelNumber);
-					break;
-				}
+	public void TRIG(int channelNumber) {
+		if(chan.isChannelEnabled(channelNumber) && _raceInSession) {
+			if(_eventName.equals("IND")) 
+				indEvent.trigger(channelNumber);
+			else if(_eventName.equals("PARAIND")) 
+				paraEvent.trigger(channelNumber);
+				
 			}
-			else if(eventType.equals("PARAIND")) {
-				//can i just do it like this instead of switch statement?
-				//				while(channelNumber>0 && channelNumber<5){
-				//					paraEvent.trigger(channelNumber);
-				//				}
-				parIndEvent=true;
-				switch(channelNumber) {
-				case 1:
-					paraEvent.trigger(channelNumber);
-					break;
-				case 2:
-					paraEvent.trigger(channelNumber);
-					break;
-				case 3: 
-					paraEvent.trigger(channelNumber);
-					break;
-				case 4: 
-					paraEvent.trigger(channelNumber);
-					break;
-
-
-				}
-			}
-		}
-		// else do nothing, channel is disabled
+		// else do nothing, channel is disabled or a race is not in session
 	}
+		
+	
 
 	@Override
 	public void START() {
