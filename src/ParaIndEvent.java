@@ -1,4 +1,3 @@
-import java.time.LocalTime;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -64,6 +63,22 @@ public class ParaIndEvent {
 			while(channels34.size()!=0)
 				finishers.add(channels34.remove());
 		}
+	}
+	
+	public Queue<Racer> moveAll() {
+		for (Racer x : channels12 ) {
+			x = channels12.remove();
+			finishers.add(x);
+		}
+		for (Racer y : channels34 ) {
+			y = channels34.remove();
+			finishers.add(y);
+		}
+		for (Racer z : waitingToRace) {
+			z = waitingToRace.remove();
+			finishers.add(z);
+		}
+		return finishers;
 	}
 
 }

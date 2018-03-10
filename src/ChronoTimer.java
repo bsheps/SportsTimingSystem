@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Queue;
 /**
  * This class handles the administrative parts of 
  * instantiating a race. It prevents multiple races
@@ -19,8 +20,7 @@ public class ChronoTimer implements Commands {
 	Printer print;
 	boolean parIndEvent=false,indiEvent=false;
 	
-	ArrayList<FinishedRacer> q1 = new ArrayList<FinishedRacer>();
-	ArrayList<FinishedRacer> q2 = new ArrayList<FinishedRacer>();
+	ArrayList<Queue<Racer>> storageUnit = new ArrayList<Queue<Racer>>();
 
 	public void printResults() {
 		if(_eventName.equals("IND")) {
@@ -61,7 +61,23 @@ public class ChronoTimer implements Commands {
 	
 	public void endRun() {
 		_raceInSession= false;
+		
+		if (_eventName.equals("IND")) storageUnit.add(indEvent.moveAll());
+		
+		else if (_eventName.equals("PARIND")) storageUnit.add(paraEvent.moveAll());
+			
+		/**else if (_eventName.equals("GRP")) {
+			storageUnit.add(groupEvent.moveAll());
+		} else {
+			storageUnit.add(paraGroupEvent.moveAll());
+		} 
+		
+		For Future Use
+		**/
+		
+		
 		print.printThis("Ending current run");
+		
 	}
 
 	@Override
@@ -222,19 +238,7 @@ public class ChronoTimer implements Commands {
 		// TODO Auto-generated method stub
 
 	}
-	
-	public void initalizeArray() {
-		
-	}
-	
-	public void setStartTime(){
-		
-	}
-	
-	public void setEndTime() {
-		
-	}
-	
+
 	
 	
 }

@@ -4,7 +4,7 @@ import java.util.Queue;
 public class IndividualEvent extends ChronoTimer {
 	Queue<Racer> WaitingToRace = (Queue<Racer>) new LinkedList<Racer>(),
 			inTheRace = (Queue<Racer>) new LinkedList<Racer>(),
-			finishers= (Queue<Racer>) new LinkedList<Racer>();
+			finishers = (Queue<Racer>) new LinkedList<Racer>();
 
 	public void addRacer(String name){
 		WaitingToRace.add(new Racer(name));
@@ -40,5 +40,18 @@ public class IndividualEvent extends ChronoTimer {
 				finishers.add(y);
 			}
 		}
+	}
+	
+	public Queue<Racer> moveAll(){
+		for (Racer x : inTheRace ) {
+			x = inTheRace.remove();
+			finishers.add(x);
+		}
+		for (Racer y : WaitingToRace) {
+			y = WaitingToRace.remove();
+			finishers.add(y);
+		}
+		
+		return finishers;
 	}
 }
