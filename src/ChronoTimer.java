@@ -19,7 +19,7 @@ public class ChronoTimer implements Commands {
 	boolean parIndEvent=false,indiEvent=false;
 
 	public void printResults() {
-		if(indiEvent) {
+		if(_eventName.equals("IND")) {
 			while(indEvent.finishers.size() > 0) {
 				Racer p = indEvent.finishers.remove();
 				print.printThis(p._bibNum + " " + p.results());
@@ -33,7 +33,7 @@ public class ChronoTimer implements Commands {
 				print.printThis(q._bibNum);
 			}
 		}
-		else if(parIndEvent) {
+		else if(_eventName.equals("PARIND")) {
 			while(paraEvent.finishers.size() > 0) {
 				Racer r = paraEvent.finishers.remove();
 				print.printThis(r._bibNum);
