@@ -18,15 +18,15 @@ public class ChronoTimer implements Commands {
 	public void printResults() {
 		while(indEvent.finishers.size() > 0) {
 			Racer p = indEvent.finishers.remove();
-			print.printThis(p.bibNum + " " + p.results());
+			print.printThis(p._bibNum + " " + p.results());
 		}
 		while(indEvent.inTheRace.size() >0) {
 			Racer d = indEvent.inTheRace.remove();
-			print.printThis(d.bibNum);
+			print.printThis(d._bibNum);
 		}
 		while(indEvent.WaitingToRace.size()>0) {
 			Racer q = indEvent.WaitingToRace.remove();
-			print.printThis(q.bibNum);
+			print.printThis(q._bibNum);
 		}
 	}
 	// clears the memory

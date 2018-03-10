@@ -26,7 +26,7 @@ public class IndividualEvent extends ChronoTimer {
 			else {
 				Racer x = WaitingToRace.remove();
 				x.startRace(Time.getCurrentTime());
-				print.printThis(" Channel " + chNum+ " triggered at " +Time.time2formattedString(Time.getCurrentTime()) + " for racer: " +x.bibNum);
+				print.printThis(" Channel " + chNum+ " triggered at " +Time.time2formattedString(Time.getCurrentTime()) + " for racer: " +x._bibNum);
 				inTheRace.add(x);
 				x = null;
 			}
@@ -36,7 +36,7 @@ public class IndividualEvent extends ChronoTimer {
 			else {
 				Racer y = inTheRace.remove();
 				y.finishRace(Time.getCurrentTime());
-				print.printThis(" Channel " + chNum+ " triggered at " +Time.time2formattedString(Time.getCurrentTime()) + " for racer: " +y.bibNum);
+				print.printThis(" Channel " + chNum+ " triggered at " +Time.time2formattedString(Time.getCurrentTime()) + " for racer: " +y._bibNum);
 				finishers.add(y);
 			}
 		}
