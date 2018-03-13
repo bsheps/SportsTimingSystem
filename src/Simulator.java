@@ -59,20 +59,14 @@ public class Simulator {
 	private void generalParser(String[] tokens) throws IOException {
 
 		// @@@@@@@@@@ FOR TESTING @@@@@@@@@@
-		// Anything between these lines can be deleted without breaking the program
 
-		// System.out.println("generalParser called... tokens.length == " +
-		// tokens.length);
-		// for (int i = 0; i < tokens.length; i++) {
-		// System.out.println("tokens[" + i + "] == " + tokens[i]);
-		// }
-		// for (int i = 0; i < tokens.length; i++) {
-		// System.out.println("tokens[" + i + "] == " + tokens[i]);
-		// }
+		System.out.println("Command ==> " + tokens[1]);
 
 		// @@@@@@@@@@ END TESTING BIT @@@@@@@@@@
 
 		switch (tokens[1]) {
+		default:
+			System.out.println("The feature, \"" + tokens[1] + "\" has not been implemented yet.");
 		case "POWER":
 			ct.POWER();
 			break;
@@ -86,16 +80,10 @@ public class Simulator {
 			ct.TRIG(Integer.parseInt(tokens[2]));
 			break;
 		case "PRINT":
-			if (tokens.length == 3) {
-				// original implementation - for printing a specific run number
-				ct.PRINT(Integer.parseInt(tokens[2]));
-			} else {
-				// else print all runs
-				int runs = ct.getOldRacesSize();
-				for (int i = 0; i < runs; i++) {
-					ct.PRINT(i);
-				}
-			}
+			ct.PRINT();
+			break;
+		case "EXPORT":
+			ct.EXPORT(Integer.parseInt(tokens[2]));
 			break;
 		case "ENDRUN":
 			ct.ENDRUN();
