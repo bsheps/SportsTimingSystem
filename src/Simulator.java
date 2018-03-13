@@ -66,9 +66,9 @@ public class Simulator {
 		// for (int i = 0; i < tokens.length; i++) {
 		// System.out.println("tokens[" + i + "] == " + tokens[i]);
 		// }
-		for (int i = 0; i < tokens.length; i++) {
-			System.out.println("tokens[" + i + "] == " + tokens[i]);
-		}
+		// for (int i = 0; i < tokens.length; i++) {
+		// System.out.println("tokens[" + i + "] == " + tokens[i]);
+		// }
 
 		// @@@@@@@@@@ END TESTING BIT @@@@@@@@@@
 
@@ -90,9 +90,8 @@ public class Simulator {
 				// original implementation - for printing a specific run number
 				ct.PRINT(Integer.parseInt(tokens[2]));
 			} else {
-				// print all runs
-				int runs = ct.getStorageUnitSize();
-				System.out.println("runs =" + runs);
+				// else print all runs
+				int runs = ct.getOldRacesSize();
 				for (int i = 0; i < runs; i++) {
 					ct.PRINT(i);
 				}
