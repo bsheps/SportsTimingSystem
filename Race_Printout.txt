@@ -59,3 +59,178 @@ DNF317
 Never Started319
 Ending current run
 Starting new IND
+Setting event to PARIND
+Setting event to PARIND
+Setting event to PARIND
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+noName :: 00:00:00.00
+noName :: 00:00:00.00
+noName :: 00:00:00.00
+noName :: 00:00:00.00
+Setting event to PARIND
+noName :: 00:00:00.00
+noName :: 00:00:00.00
+noName :: 00:00:00.00
+noName :: 00:00:00.00
+noName :: 00:00:00.00
+noName :: 00:00:00.00
+noName :: 00:00:00.00
+noName :: 00:00:00.00
+POWERING OFF - PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = 711, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = noName, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = 711, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = noName, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = 711, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = noName, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = 711, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = noName, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = 711, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = noName, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = 711, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = noName, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = 711, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = noName, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = 711, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = noName, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = 711, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = noName, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+POWERING OFF- PENDING ITEMS:
+Setting event to PARIND
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = 711, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+Bib Number = 272, Result = 00:00:00.00
+Bib Number = noName, Result = 00:00:00.00
+Bib Number = 123, Result = 00:00:00.00
+Bib Number = 111, Result = 00:00:00.00
+POWERING OFF- PENDING ITEMS:
