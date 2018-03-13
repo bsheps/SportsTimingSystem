@@ -1,6 +1,4 @@
-import java.time.LocalTime;
-
-public interface Commands {
+public interface CommandsInterface {
 	void CLR(int bibNumber); // remove the competitor from queue
 	void CONN(String sensorType, int channel); // connect a sensor
 	void DISC(int channel2disconnect);

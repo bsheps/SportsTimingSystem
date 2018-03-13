@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Simulator{
-	Commands ct;
+	CommandsInterface ct;
 	boolean simulatorOn;
 
 	/**

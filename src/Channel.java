@@ -1,5 +1,5 @@
 
-public class Channel extends ChronoTimer{
+public class Channel{
 	private boolean[] channel = new boolean[12];
 	private String[] sensor = new String[12];
 	public Channel() {
@@ -8,7 +8,7 @@ public class Channel extends ChronoTimer{
 	}
 	public boolean Toggle(int ch) {
 		channel[ch] = !channel[ch];
-		print.printThis("Channel "+ch+" is " + (channel[ch]? "Enabled": "Disabled"));
+		//print.printThis("Channel "+ch+" is " + (channel[ch]? "Enabled": "Disabled"));
 		return channel[ch];
 	}
 	public boolean isChannelEnabled(int channelNumber) {

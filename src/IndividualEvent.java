@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class IndividualEvent extends ChronoTimer {
+public class IndividualEvent implements EventInterface{
 	Queue<Racer> WaitingToRace = (Queue<Racer>) new LinkedList<Racer>(),
 			inTheRace = (Queue<Racer>) new LinkedList<Racer>(),
 			finishers = (Queue<Racer>) new LinkedList<Racer>();
@@ -21,22 +21,22 @@ public class IndividualEvent extends ChronoTimer {
 				Racer n = new Racer("noName");
 				n.startRace(Time.getCurrentTime());
 				inTheRace.add(n);
-				print.printThis(" Channel " + chNum+ " triggered at " +Time.time2formattedString(Time.getCurrentTime()) + " for racer: noName");
+				//print.printThis(" Channel " + chNum+ " triggered at " +Time.time2formattedString(Time.getCurrentTime()) + " for racer: noName");
 			}
 			else {
 				Racer x = WaitingToRace.remove();
 				x.startRace(Time.getCurrentTime());
-				print.printThis(" Channel " + chNum+ " triggered at " +Time.time2formattedString(Time.getCurrentTime()) + " for racer: " +x._bibNum);
+				//print.printThis(" Channel " + chNum+ " triggered at " +Time.time2formattedString(Time.getCurrentTime()) + " for racer: " +x._bibNum);
 				inTheRace.add(x);
 				x = null;
 			}
 		}
 		else if(chNum == 2){	// even means end race
-			if(inTheRace.size() == 0) print.printThis("Channel " + chNum +" triggered at " + Time.time2formattedString(Time.getCurrentTime()) +"--ERROR: No more racers");
+			if(inTheRace.size() == 0); //print.printThis("Channel " + chNum +" triggered at " + Time.time2formattedString(Time.getCurrentTime()) +"--ERROR: No more racers");
 			else {
 				Racer y = inTheRace.remove();
 				y.finishRace(Time.getCurrentTime());
-				print.printThis(" Channel " + chNum+ " triggered at " +Time.time2formattedString(Time.getCurrentTime()) + " for racer: " +y._bibNum);
+				//print.printThis(" Channel " + chNum+ " triggered at " +Time.time2formattedString(Time.getCurrentTime()) + " for racer: " +y._bibNum);
 				finishers.add(y);
 			}
 		}

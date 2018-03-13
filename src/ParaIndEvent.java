@@ -6,16 +6,12 @@ import java.util.Queue;
  * channel 1,3 is start, channel 2,4 is for finish 
  */
 
-public class ParaIndEvent {
-	Queue<Racer> channels12,finishers,channels34,waitingToRace; 
-	Printer printer;
+public class ParaIndEvent implements EventInterface{
+	Queue<Racer> channels12= (Queue<Racer>) new LinkedList<Racer>(),
+			finishers= (Queue<Racer>) new LinkedList<Racer>(),
+			channels34 = (Queue<Racer>) new LinkedList<Racer>(),
+			waitingToRace = (Queue<Racer>) new LinkedList<Racer>(); 
 
-	public ParaIndEvent() {
-		channels12 = (Queue<Racer>) new LinkedList<Racer>();
-		channels34 = (Queue<Racer>)new LinkedList<Racer>();
-		waitingToRace = (Queue<Racer>) new LinkedList<Racer>();
-		finishers = (Queue<Racer>) new LinkedList<Racer>();
-	}
 
 	public void addRacer(String name) {
 		waitingToRace.add(new Racer(name));

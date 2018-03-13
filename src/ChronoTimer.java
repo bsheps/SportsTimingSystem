@@ -10,11 +10,10 @@ import java.util.Queue;
  * @author BS
  *
  */
-public class ChronoTimer implements Commands {
+public class ChronoTimer implements CommandsInterface {
 	Channel chan;
 	String _eventName = "IND";
-	IndividualEvent indEvent;
-	ParaIndEvent paraEvent;
+	EventInterface _event;
 	boolean _powerOn= false;
 	boolean _raceInSession=false;
 	Printer print;
@@ -22,34 +21,34 @@ public class ChronoTimer implements Commands {
 	
 	ArrayList<Queue<Racer>> storageUnit = new ArrayList<Queue<Racer>>();
 
-	public void printResults() {
-		if(_eventName.equals("IND")) {
-			while(indEvent.finishers.size() > 0) {
-				Racer p = indEvent.finishers.remove();
-				print.printThis(p._bibNum + " " + p.results());
-			}
-			while(indEvent.inTheRace.size() >0) {
-				Racer d = indEvent.inTheRace.remove();
-				print.printThis(d._bibNum);
-			}
-			while(indEvent.WaitingToRace.size()>0) {
-				Racer q = indEvent.WaitingToRace.remove();
-				print.printThis(q._bibNum);
-			}
-		}
-		else if(_eventName.equals("PARIND")) {
-			while(paraEvent.finishers.size() > 0) {
-				Racer r = paraEvent.finishers.remove();
-				print.printThis(r._bibNum);
-			}
-
-			//i'm not sure if racers in waiting to race get a DNF if the race ends or not,
-			//			while(paraEvent.finishers.size() > 0) {
-			//				Racer f = paraEvent.waitingToRace.remove();
-			//				print.printThis(f._bibNum);
-			//			}
-		}
-	}
+//	public void printResults() {
+//		if(_eventName.equals("IND")) {
+//			while(_event.finishers.size() > 0) {
+//				Racer p = _event.finishers.remove();
+//				print.printThis(p._bibNum + " " + p.results());
+//			}
+//			while(_event.inTheRace.size() >0) {
+//				Racer d = _event.inTheRace.remove();
+//				print.printThis(d._bibNum);
+//			}
+//			while(_event.WaitingToRace.size()>0) {
+//				Racer q = _event.WaitingToRace.remove();
+//				print.printThis(q._bibNum);
+//			}
+//		}
+//		else if(_eventName.equals("PARIND")) {
+//			while(_event.finishers.size() > 0) {
+//				Racer r = _event.finishers.remove();
+//				print.printThis(r._bibNum);
+//			}
+//
+//			//i'm not sure if racers in waiting to race get a DNF if the race ends or not,
+//			//			while(paraEvent.finishers.size() > 0) {
+//			//				Racer f = paraEvent.waitingToRace.remove();
+//			//				print.printThis(f._bibNum);
+//			//			}
+//		}
+//	}
 	// clears the memory
 	public void reset() throws IOException {
 		print.PrinterRest();
@@ -62,9 +61,9 @@ public class ChronoTimer implements Commands {
 	public void endRun() {
 		_raceInSession= false;
 		
-		if (_eventName.equals("IND")) storageUnit.add(indEvent.moveAll());
+		if (_eventName.equals("IND")) storageUnit.add(_event.moveAll());
 		
-		else if (_eventName.equals("PARIND")) storageUnit.add(paraEvent.moveAll());
+		else if (_eventName.equals("PARIND")) storageUnit.add(_event.moveAll());
 			
 		/**else if (_eventName.equals("GRP")) {
 			storageUnit.add(groupEvent.moveAll());
@@ -100,7 +99,7 @@ public class ChronoTimer implements Commands {
 
 	@Override
 	public void DNF() {
-		paraEvent.endEvent(true);
+		
 	}
 
 	@Override
@@ -145,17 +144,17 @@ public class ChronoTimer implements Commands {
 		else{
 			_raceInSession = true;
 			if(_eventName.equals("IND"))
-				indEvent = new IndividualEvent();
+				_event = new IndividualEvent();
 			else if(_eventName.equals("PARIND"))
-				paraEvent = new ParaIndEvent();
+				_event = new ParaIndEvent();
 		}
 	}
 
 	public void NUM(String bibNumber) {
 		if(indiEvent)
-			indEvent.addRacer(bibNumber);
+			_event.addRacer(bibNumber);
 		else if(parIndEvent)
-			paraEvent.addRacer(bibNumber);
+			_event.addRacer(bibNumber);
 	}
 
 
@@ -169,20 +168,19 @@ public class ChronoTimer implements Commands {
 		else if(_powerOn){ 
 			_powerOn = false;
 			_raceInSession = false;
-			if(_eventName.equals("IND") && indEvent != null) {
+			if(_eventName.equals("IND") && _event != null) {
 				print.printThis("POWERING OFF- PENDING ITEMS:");
-				printResults();
+			//	printResults();
 				print.shutDownPrinter();
 			}
-			indEvent = null;
+			
 
-			if(_eventName.equals("PARIND") && paraEvent!=null) {
+			if(_eventName.equals("PARIND") && _event!=null) {
 				print.printThis("POWERING OFF - PENDING ITEMS:");
-				printResults();
+			//	printResults();
 				print.shutDownPrinter();
 			}
-			paraEvent = null;
-
+			
 
 		}	
 	}
@@ -217,9 +215,9 @@ public class ChronoTimer implements Commands {
 	public void TRIG(int channelNumber) {
 		if(chan.isChannelEnabled(channelNumber) && _raceInSession) {
 			if(_eventName.equals("IND")) 
-				indEvent.trigger(channelNumber);
+				_event.trigger(channelNumber);
 			else if(_eventName.equals("PARIND")) 
-				paraEvent.trigger(channelNumber);
+				_event.trigger(channelNumber);
 				
 			}
 		// else do nothing, channel is disabled or a race is not in session
@@ -229,7 +227,7 @@ public class ChronoTimer implements Commands {
 
 	@Override
 	public void START() {
-		// TODO Auto-generated method stub
+		_event.trigger(1);
 
 	}
 
