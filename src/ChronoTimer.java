@@ -15,23 +15,29 @@ public class ChronoTimer implements CommandsInterface {
 
 	Channel chan;
 	String _eventName;
-	EventInterface _event;
+	// EventInterface _event;
+	ParaIndEvent parind;
+	IndividualEvent ind;
 	boolean _powerOn;
 	boolean _raceInSession;
 	Printer print;
 	boolean parIndEvent, indiEvent;
 	ArrayList<Queue<Racer>> storageUnit;
+	ArrayList<EventInterface> oldRaces;
 
 	public ChronoTimer() throws IOException {
 		this.chan = new Channel();
 		this._eventName = null; // could set default to "IND"
 		// this._event = null; //redundant
+		parind = new ParaIndEvent();
+		ind = new IndividualEvent();
 		this._powerOn = false;
 		this._raceInSession = false;
 		this.print = new Printer();
 		this.parIndEvent = false;
 		this.indiEvent = false;
 		this.storageUnit = new ArrayList<Queue<Racer>>();
+		oldRaces = new ArrayList<EventInterface>();
 	}
 
 	// public void printResults() {
@@ -75,12 +81,11 @@ public class ChronoTimer implements CommandsInterface {
 	public void endRun() {
 		_raceInSession = false;
 
-		if (_eventName.equals("IND"))
-			storageUnit.add(_event.moveAll());
-
-		else if (_eventName.equals("PARIND"))
-			storageUnit.add(_event.moveAll());
-
+		if (_eventName.equals("IND")) {
+			storageUnit.add(ind.moveAll());
+		} else if (_eventName.equals("PARIND")) {
+			storageUnit.add(parind.moveAll());
+		}
 		/**
 		 * else if (_eventName.equals("GRP")) { storageUnit.add(groupEvent.moveAll()); }
 		 * else { storageUnit.add(paraGroupEvent.moveAll()); }
@@ -92,8 +97,8 @@ public class ChronoTimer implements CommandsInterface {
 
 	}
 
-	public int getStorageUnitSize() {
-		return storageUnit.size();
+	public int getOldRacesSize() {
+		return oldRaces.size();
 	}
 
 	@Override
@@ -145,7 +150,6 @@ public class ChronoTimer implements CommandsInterface {
 
 	@Override
 	public void EXPORT(int runNumber) {
-		System.out.println(storageUnit.get(runNumber));
 
 	}
 
@@ -161,18 +165,33 @@ public class ChronoTimer implements CommandsInterface {
 			System.out.println("ERROR RACE IN SESSION: End current run before starting a NEWRUN.");
 		else {
 			_raceInSession = true;
-			if (_eventName.equals("IND"))
-				_event = new IndividualEvent();
-			else if (_eventName.equals("PARIND"))
-				_event = new ParaIndEvent();
+
+			/*
+			 * OLD CODE // bjf: This is a problem. If we overwite our events, //then we lose
+			 * the old event data. // if (_eventName.equals("IND")) { // ind = new
+			 * IndividualEvent(); // } else if (_eventName.equals("PARIND")) { // parind =
+			 * new ParaIndEvent(); // }
+			 */
+
+			/* NEW CODE // this way we save the */
+			if (_eventName.equals("IND")) {
+				ind.moveAll();
+				oldRaces.add(ind);
+				ind = new IndividualEvent();
+			} else if (_eventName.equals("PARIND")) {
+				parind.moveAll();
+				oldRaces.add(parind);
+				parind = new ParaIndEvent();
+			}
+
 		}
 	}
 
 	public void NUM(String bibNumber) {
 		if (indiEvent)
-			_event.addRacer(bibNumber);
+			ind.addRacer(bibNumber);
 		else if (parIndEvent)
-			_event.addRacer(bibNumber);
+			parind.addRacer(bibNumber);
 	}
 
 	public void POWER() {
@@ -184,13 +203,13 @@ public class ChronoTimer implements CommandsInterface {
 		} else if (_powerOn) {
 			_powerOn = false;
 			_raceInSession = false;
-			if (_eventName.equals("IND") && _event != null) {
+			if (_eventName.equals("IND") && ind != null) {
 				print.printThis("POWERING OFF- PENDING ITEMS:");
 				// printResults();
 				print.shutDownPrinter();
 			}
 
-			if (_eventName.equals("PARIND") && _event != null) {
+			if (_eventName.equals("PARIND") && parind != null) {
 				print.printThis("POWERING OFF - PENDING ITEMS:");
 				// printResults();
 				print.shutDownPrinter();
@@ -201,11 +220,13 @@ public class ChronoTimer implements CommandsInterface {
 
 	@Override
 	public void PRINT(int runNumber) {
-		System.out.println(runNumber);
-		Queue<Racer> runResult = storageUnit.get(runNumber);
-		for (Racer r : runResult) {
-			print.printThis(r.getBibNum() + " :: " + r.results());
+		if(runNumber < 0 || runNumber > oldRaces.size()) {
+			throw new IllegalArgumentException("Cannot find this run number.");
 		}
+		 Queue<Racer> loadResult = oldRaces.get(runNumber).getFinishers();
+		 for (Racer r : loadResult) {
+		 print.printThis(r.getBibNum() + " :: " + r.results());
+		 }
 	}
 
 	@Override
@@ -233,9 +254,9 @@ public class ChronoTimer implements CommandsInterface {
 	public void TRIG(int channelNumber) {
 		if (chan.isChannelEnabled(channelNumber) && _raceInSession) {
 			if (_eventName.equals("IND"))
-				_event.trigger(channelNumber);
+				ind.trigger(channelNumber);
 			else if (_eventName.equals("PARIND"))
-				_event.trigger(channelNumber);
+				parind.trigger(channelNumber);
 
 		}
 		// else do nothing, channel is disabled or a race is not in session
@@ -243,7 +264,11 @@ public class ChronoTimer implements CommandsInterface {
 
 	@Override
 	public void START() {
-		_event.trigger(1);
+		if (_eventName.equals("IND")) {
+			ind.trigger(1);
+		} else if (_eventName.equals("PARIND")) {
+			parind.trigger(1);
+		}
 
 	}
 
