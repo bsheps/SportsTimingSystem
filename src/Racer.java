@@ -3,17 +3,24 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * @author bshepard Racers has 3 fields: name, startTime and endTime
+ * 
+ *         bjf: I've added getters and setters for each of the fields related to
+ *         Json parsing...
  */
 public class Racer {
-	final DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss.SS");;
-	String _bibNum;
-	LocalTime _startTime, _endTime;
+	private final DateTimeFormatter formatTime = DateTimeFormatter.ofPattern("HH:mm:ss.SS");;
+	private String _bibNum;
+	private LocalTime _startTime, _endTime;
 
 	/**
 	 * Constructs a racer
 	 * 
 	 * @param name
 	 */
+	public Racer() {
+		this(null, null, null);
+	}
+
 	public Racer(String name) {
 		this(name, null, null);
 	}
@@ -35,6 +42,32 @@ public class Racer {
 		return _bibNum;
 	}
 
+	public void setBibNum(String bib) {
+		if (bib != null) {
+			this._bibNum = bib;
+		}
+	}
+
+	public LocalTime getStartTime() {
+		return _startTime;
+	}
+
+	public void setStartTime(LocalTime st) {
+		if (st != null) {
+			this._startTime = st;
+		}
+	}
+
+	public LocalTime getEndTime() {
+		return _endTime;
+	}
+
+	public void setEndTime(LocalTime et) {
+		if (et != null) {
+			this._endTime = et;
+		}
+	}
+
 	/**
 	 * Sets the start time for racer
 	 * 
@@ -54,13 +87,18 @@ public class Racer {
 	}
 
 	/**
+	 * bjf: modified to return race state (waiting/dnf)
 	 * 
 	 * @return a printer friendly string of the racer's time
 	 */
 	public String results() {
-		if (_endTime == null || _startTime == null)
-			return "Error printing results";
-		return LocalTime.ofNanoOfDay(_endTime.toNanoOfDay() - _startTime.toNanoOfDay()).format(formatTime);
+		if (_endTime == null && _startTime == null) {
+			return "WAITING TO RACE";
+		} else if (_endTime == null) {
+			return "DNF";
+		} else {
+			return LocalTime.ofNanoOfDay(_endTime.toNanoOfDay() - _startTime.toNanoOfDay()).format(formatTime);
+		}
 	}
 
 }
