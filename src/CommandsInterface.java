@@ -11,11 +11,11 @@ public interface CommandsInterface {
 	void NEWRUN();	
 	void NUM(String bibNumber); // set next competitor to start
 	void POWER();
-	void PRINT(int runNumber); // 
+	void PRINT(); //bjf: I had to remove the argument for this method. See my note in CT class 
 	void RESET();
 	void TIME(String time);
 	void TOG(int channelNumber);
 	void TRIG(int channelNumber);	
 	void START();	// trigger channel 1
-	void SWAP(); // swap the next 2 competitor from queue	
+	void SWAP(); // swap the next 2 competitor from queue
 }
