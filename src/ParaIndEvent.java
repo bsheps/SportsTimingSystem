@@ -77,4 +77,10 @@ public class ParaIndEvent implements EventInterface{
 		return finishers;
 	}
 
+	@Override
+	public Queue<Racer> getFinishers() {
+		// TODO Auto-generated method stub
+		return finishers;
+	}
+
 }
